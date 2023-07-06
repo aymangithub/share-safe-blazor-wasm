@@ -19,4 +19,11 @@ public static class LocalizationConstants
         new("ar", "عربي", true),
         new("pt-BR", "Portugues")
     };
+    public static readonly LanguageCode[] TargetLanguages =
+   {
+        new("en-US", "English"),
+       
+        new("de-DE", "German"),
+       
+    };
 }

@@ -1,0 +1,38 @@
+﻿@page "/chathome"
+@attribute [AllowAnonymous]
+@inject IStringLocalizer<ChatHome> L
+@inject IStringLocalizer<SharedResource> LS
+
+<div class="d-flex justify-center">
+    <img src="share-safe-logo.png" Style="height:120px" />
+</div>
+<div class="fsh-center-text">
+    <MudText Typo="Typo.h4" GutterBottom="true">@L["Share Safe"] </MudText>
+    <MudText>
+        @L["Encrypted Messaging Made Easy."]
+    </MudText>
+</div>
+<br />
+<EditForm Model="@_tokenRequest" OnValidSubmit="SubmitAsync">
+    <MudGrid>
+        <DataAnnotationsValidator />
+        <CustomValidation @ref="_customValidation" />
+
+        <MudItem xs="12" Class="d-flex justify-center">
+            <MudButton ButtonType="ButtonType.Submit" Disabled="BusySubmitting" Variant="Variant.Filled"
+                       Color="Color.Primary" Size="Size.Large" StartIcon="@Icons.Filled.Chat" Style="width: 100%;">@L["New Chat"]</MudButton>
+        </MudItem>
+        <MudItem xs="12" Class="d-flex justify-center">
+            <MudButton ButtonType="ButtonType.Submit" Disabled="BusySubmitting" Variant="Variant.Filled"
+                       Color="Color.Primary" Size="Size.Large" StartIcon="@Icons.Filled.GroupAdd" Style="width: 100%;">@L["Join Chat"]</MudButton>
+
+        </MudItem>
+        <MudItem xs="9" md="6">
+            <MudButton StartIcon="@Icons.Filled.AppRegistration" Link="/users/self-register">@L["Need Help?"]</MudButton>
+        </MudItem>
+        <MudItem xs="12">
+            <LanguageSelector ShowButtonList="true" />
+        </MudItem>
+
+    </MudGrid>
+</EditForm>

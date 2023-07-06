@@ -1,23 +1,50 @@
 ﻿@inject IStringLocalizer<LanguageSelector> L
 
 <MudTooltip Text="@CurrentLanguage">
-    <MudMenu Icon="@Icons.Material.Outlined.Translate" Color="Color.Inherit" Direction="Direction.Bottom" OffsetY="true"
-        Dense="true">
-        @foreach (var language in LocalizationConstants.SupportedLanguages)
-        {
-            if (language.Code == CurrentLanguage)
+    @if (ShowButtonList)
+    {
+
+        <MudGrid>
+
+            @foreach (var language in LocalizationConstants.TargetLanguages)
             {
-                <MudMenuItem style="background:var(--mud-palette-primary); color:white">@L[language.DisplayName]</MudMenuItem>
+                <MudItem xs="6">
+                    <MudButton Variant="Variant.Outlined" Color="language.Code == CurrentLanguage ? Color.Primary : Color.Default"
+                               Disabled="language.Code == CurrentLanguage" @onclick="() => ChangeLanguageAsync(language.Code)">
+                        @L[language.DisplayName]
+                    </MudButton>
+                </MudItem>
+
             }
-            else
+        </MudGrid>
+    }
+    else
+    {
+
+        <MudMenu Icon="@Icons.Material.Outlined.Translate" Color="Color.Inherit" Direction="Direction.Bottom" OffsetY="true"
+                 Dense="true">
+            @foreach (var language in LocalizationConstants.TargetLanguages)
             {
-                <MudMenuItem OnClick="(()=> ChangeLanguageAsync(language.Code))">@L[language.DisplayName]</MudMenuItem>
+                if (language.Code == CurrentLanguage)
+                {
+                    <MudMenuItem style="background:var(--mud-palette-primary); color:white">@L[language.DisplayName]</MudMenuItem>
+                }
+                else
+                {
+                    <MudMenuItem OnClick="(()=> ChangeLanguageAsync(language.Code))">@L[language.DisplayName]</MudMenuItem>
+                }
             }
-        }
-    </MudMenu>
+        </MudMenu>
+
+    }
+
+
+
 </MudTooltip>
 
 @code {
+    [Parameter]
+    public bool ShowButtonList { get; set; }
     public string? CurrentLanguage { get; set; } = "en-US";
 
     protected override async Task OnInitializedAsync()
