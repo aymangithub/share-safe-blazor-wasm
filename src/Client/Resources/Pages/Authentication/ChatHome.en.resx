@@ -117,17 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Creating New Chat...." xml:space="preserve">
+    <value>Creating New Chat....</value>
+  </data>
   <data name="Encrypted Messaging Made Easy." xml:space="preserve">
     <value>Encrypted Messaging Made Easy.</value>
   </data>
   <data name="Join Chat" xml:space="preserve">
     <value>Join Chat</value>
   </data>
+  <data name="Joining to Chatting...." xml:space="preserve">
+    <value>Joining to Chatting....</value>
+  </data>
   <data name="Need Help?" xml:space="preserve">
     <value>Need Help?</value>
   </data>
   <data name="New Chat" xml:space="preserve">
     <value>New Chat</value>
+  </data>
+  <data name="Please enter the code from the chat owner." xml:space="preserve">
+    <value>Please enter the code from the chat owner.</value>
   </data>
   <data name="Share Safe" xml:space="preserve">
     <value>Share Safe</value>

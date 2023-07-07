@@ -1,4 +1,5 @@
 ﻿using FSH.BlazorWebAssembly.Client.Components.Common;
+using FSH.BlazorWebAssembly.Client.Components.Dialogs;
 using FSH.BlazorWebAssembly.Client.Components.EntityTable;
 using FSH.BlazorWebAssembly.Client.Infrastructure.ApiClient;
 using FSH.BlazorWebAssembly.Client.Infrastructure.Auth;
@@ -23,6 +24,14 @@ public partial class ChatHome
     private CustomValidation? _customValidation;
 
     public bool BusySubmitting { get; set; }
+    public bool Joining { get; set; }
+    public bool IsThereSubmitting
+    {
+        get
+        {
+            return Joining || BusySubmitting;
+        }
+    }
 
     private readonly TokenRequest _tokenRequest = new();
     private string TenantId { get; set; } = string.Empty;
@@ -71,53 +80,31 @@ public partial class ChatHome
     private async Task SubmitAsync()
     {
         BusySubmitting = true;
-
-        if (await ApiHelper.ExecuteCallGuardedAsync(
-            () => AuthService.LoginAsync(TenantId, _tokenRequest),
-            Snackbar,
-            _customValidation))
-        {
-            Snackbar.Add($"Logged in as {_tokenRequest.Email}", Severity.Info);
-        }
-
+        await Task.Delay(5000);
         BusySubmitting = false;
+
+
+
     }
-    //private async Task InvokeJoinChatModal()
-    //{
-    //    var joinChatModel = new JoinChatModel();
+    public async Task RemoveImageAsync()
+    {
+        string deleteContent = L["Please enter the code from the chat owner."];
+        var parameters = new DialogParameters();
 
-    //    var parameters = new DialogParameters
-    //{
-    //    { nameof(JoinChatModel.Code), joinChatModel }
-    //};
-      
-    //    parameters.Add(nameof(JoinChatModel.Code), " as dasd asds");
-
-    //    var dialogResult = await DialogService.ShowModalAsync<JoinChatModel>(parameters);
-
-    //    if (!dialogResult.Cancelled)
-    //    {
-    //        // Access the entered chat code and user ID from the model
-    //        string code = joinChatModel.Code;
-    //        string userId = joinChatModel.UserId;
-
-    //        // Handle the join chat logic using the chat code and user ID
-    //       // await JoinChatAsync(code, userId);
-    //    }
-    //}
+        parameters.Add(nameof(JoinChatConfirmation.ContentText), deleteContent);
 
 
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
 
-
-
-
-
-
+        var dialog = DialogService.Show<JoinChatConfirmation>(L["Delete"], parameters, options);
+        var result = await dialog.Result;
+        if (!result.Cancelled)
+        {
+            Joining = true;
+            await Task.Delay(2000);
+            Joining = false;
+            //_profileModel.DeleteCurrentImage = true;
+            //await UpdateProfileAsync();
+        }
+    }
 }
-
-
-//public class JoinChatModel : ComponentBase
-//{
-//    public string Code { get; set; }
-//    public string UserId { get; set; }
-//}

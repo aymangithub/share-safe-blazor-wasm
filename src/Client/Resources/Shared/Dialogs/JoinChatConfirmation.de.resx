@@ -117,28 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Creating New Chat...." xml:space="preserve">
-    <value>Creating New Chat....</value>
+  <data name="Cancel" xml:space="preserve">
+    <value>Stornieren</value>
   </data>
-  <data name="Encrypted Messaging Made Easy." xml:space="preserve">
-    <value>Verschlüsselte Nachrichten leicht gemacht.</value>
+  <data name="Code" xml:space="preserve">
+    <value>Code</value>
   </data>
-  <data name="Join Chat" xml:space="preserve">
-    <value>Chat beitreten</value>
+  <data name="Join" xml:space="preserve">
+    <value>Verbinden</value>
   </data>
-  <data name="Joining to Chatting...." xml:space="preserve">
-    <value>Dem Chat beitreten....</value>
-  </data>
-  <data name="Need Help?" xml:space="preserve">
-    <value>Brauchen Sie Hilfe?</value>
-  </data>
-  <data name="New Chat" xml:space="preserve">
-    <value>Neuer Chat</value>
-  </data>
-  <data name="Please enter the code from the chat owner." xml:space="preserve">
-    <value>Bitte geben Sie den Code des Chat-Inhabers ein.</value>
-  </data>
-  <data name="Share Safe" xml:space="preserve">
-    <value>Share Safe</value>
+  <data name="Join Chat Confirmation" xml:space="preserve">
+    <value>Chat-Bestätigung beitreten</value>
   </data>
 </root>

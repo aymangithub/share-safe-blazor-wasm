@@ -19,12 +19,17 @@
         <CustomValidation @ref="_customValidation" />
 
         <MudItem xs="12" Class="d-flex justify-center">
-            <MudButton ButtonType="ButtonType.Submit" Disabled="BusySubmitting" Variant="Variant.Filled"
-                       Color="Color.Primary" Size="Size.Large" StartIcon="@Icons.Filled.Chat" Style="width: 100%;">@L["New Chat"]</MudButton>
+            <MudButton OnClick="!IsThereSubmitting ?SubmitAsync: null" Variant="Variant.Filled"
+                       Color="Color.Primary" Size="Size.Large" StartIcon="@(!BusySubmitting ? Icons.Filled.Chat : Icons.Filled.AvTimer)" Style="width: 100%;">
+                @(BusySubmitting == true ? L["Creating New Chat...."] : L["New Chat"])
+            </MudButton>
         </MudItem>
         <MudItem xs="12" Class="d-flex justify-center">
-            <MudButton ButtonType="ButtonType.Submit" Disabled="BusySubmitting" Variant="Variant.Filled"
-                       Color="Color.Primary" Size="Size.Large" StartIcon="@Icons.Filled.GroupAdd" Style="width: 100%;">@L["Join Chat"]</MudButton>
+            <MudButton OnClick="!IsThereSubmitting ?RemoveImageAsync: null" Variant="Variant.Filled"
+                       Color="Color.Primary" Size="Size.Large" StartIcon="@(!Joining ? Icons.Filled.GroupAdd : Icons.Filled.AvTimer)" Style="width: 100%;">
+                @(Joining == true ? L["Joining to Chatting...."] : L["Join Chat"])
+
+            </MudButton>
 
         </MudItem>
         <MudItem xs="9" md="6">

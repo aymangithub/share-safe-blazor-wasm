@@ -1,0 +1,43 @@
+﻿@inject IStringLocalizer<JoinChatConfirmation> L
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.Delete" Class="mr-3 mb-n1" />
+            @L["Join Chat Confirmation"]
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudText>@ContentText</MudText>
+        <MudGrid>
+            <MudItem xs="12">
+                <MudTextField T="string" Label="@L["Code"]" Variant="Variant.Outlined" @bind-Value="Code"
+                              For="@(() => Code)" Required  />
+
+            </MudItem>
+        </MudGrid>
+
+    </DialogContent>
+    <DialogActions>
+
+        <MudButton StartIcon="@Icons.Filled.Cancel" OnClick="Cancel">@L["Cancel"]</MudButton>
+        <MudButton StartIcon="@Icons.Filled.Delete" Color="Color.Primary" Variant="Variant.Filled" OnClick="Submit">@L["Join"]</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+
+
+    public string Code { get; set; }
+    [CascadingParameter]
+    MudDialogInstance MudDialog { get; set; } = default!;
+
+    [Parameter]
+    public string? ContentText { get; set; }
+
+    void Submit()
+    {
+        MudDialog.Close(DialogResult.Ok(Code));
+    }
+    void Cancel() => MudDialog.Cancel();
+}

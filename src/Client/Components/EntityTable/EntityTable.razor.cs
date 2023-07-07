@@ -319,3 +319,9 @@ public partial class EntityTable<TEntity, TId, TRequest>
         }
     }
 }
+
+public class testc : ComponentBase {
+
+
+
+}
