@@ -1,0 +1,175 @@
+﻿@page "/chat/{CId}"
+@page "/chat"
+@using System.Globalization
+@using AdminDashboard.Wasm.Models;
+@using AdminDashboard.Wasm.ModelsAdminDashboard.Wasm.Models;
+@inject IStringLocalizer<Chat> L
+
+
+
+<div class="d-flex flex-grow-1 flex-row">
+    <MudPaper Elevation="25" Class="py-4 flex-grow-1">
+        <MudToolBar Dense="true">
+
+            @if (string.IsNullOrEmpty(""))
+            {
+                <MudIcon Icon="@Icons.Material.Outlined.ChatBubble" Style="margin-right:10px">  </MudIcon>
+                <MudText Typo="Typo.h6"> 123 569 654</MudText>
+                <MudIconButton Icon="@Icons.Material.Outlined.Edit" Color="Color.Inherit" Class="ml-3" />
+
+
+            }
+            else
+            {
+                <MudIcon Icon="@Icons.Material.Outlined.ChatBubble" Style="margin-right:10px">  </MudIcon>
+                <MudText Typo="Typo.h6">CFullName</MudText>
+            }
+            
+           @* <MudIcon Icon="@Icons.Material.Outlined.Person" Style="margin-left:10px">  </MudIcon>
+            <MudText Typo="Typo.h6">@L["Vault Code:"] 123 456 523</MudText>*@
+            <MudSpacer />
+            @*<MudIconButton  Icon="@Icons.Material.Outlined.Share" Color="Color.Inherit" Class="ml-3" />*@
+            <MudMenu Icon="@Icons.Material.Outlined.Share" Color="Color.Inherit"  Direction="Direction.Bottom" OffsetY="true"
+                 Dense="true">
+                <MudIconButton Icon="@Icons.Material.Outlined.FileCopy" Color="Color.Inherit" Class="ml-3" />
+                <MudIconButton Icon="@Icons.Material.Outlined.Link" Color="Color.Inherit" Class="ml-3" />
+                <MudIconButton Icon="@Icons.Material.Outlined.QrCode" Color="Color.Inherit" Class="ml-3" />
+
+
+            }
+            </MudMenu>
+
+
+            <MudIconButton  Icon="@Icons.Material.Outlined.Settings" Color="Color.Inherit" Class="ml-3" />
+            <MudIconButton  Icon="@Icons.Material.Outlined.Download" Color="Color.Inherit" Class="ml-3" />
+
+            <MudMenu Icon="@Icons.Material.Outlined.Close" Color="Color.Inherit" Direction="Direction.Bottom" OffsetY="true"
+                     Dense="true">
+                <MudButton StartIcon="@Icons.Material.Filled.ExitToApp">@L["Leave"]</MudButton>
+                <MudButton StartIcon="@Icons.Filled.Delete" >@L["Delete"]</MudButton>
+
+
+
+                }
+            </MudMenu>
+            @*<MudHidden Breakpoint="Breakpoint.MdAndUp">
+                <MudIconButton Icon="@Icons.Material.Outlined.PeopleAlt" Color="Color.Inherit" Class="ml-3" />
+            </MudHidden>*@
+        </MudToolBar>
+
+        <div class="d-flex flex-column px-4" style="max-height:65vh;min-height:65vh; overflow:scroll;" id="chatContainer">
+            @foreach (var message in _messages)
+            {
+                <div class="d-flex flex-row my-4">
+                    <div class="mr-4">
+                        @if (string.IsNullOrEmpty(message.FromUserImageURL))
+                        {
+                            <MudAvatar Color="Color.Secondary" Style="height:50px; width:50px;">@message.FromUserFullName.ToUpper().FirstOrDefault()</MudAvatar>
+                        }
+                        else
+                        {
+                            <MudAvatar Image="@message.FromUserImageURL" Style="height:50px; width:50px;"> </MudAvatar>
+                        }
+                    </div>
+                    <div>
+                        <MudText Typo="Typo.body1">@message.FromUserFullName</MudText>
+                        <MudText Typo="Typo.caption" Style="font-size: xx-small!important;">@message.CreatedDate.ToString("G", CultureInfo.CurrentCulture)</MudText>
+                        <MudText Typo="Typo.body2" Style=" padding: 15px;border-radius: 5px;margin-top:5px">@message.Message</MudText>
+                    </div>
+                </div>
+            }
+        </div>
+        <MudPaper Elevation="25" Class="d-flex flex-row px-2 mx-4" Style="">
+          
+
+            <MudTextField T="string" Placeholder="@L["Enter your message..."]" DisableUnderLine="true" Class="mt-n2 mx-4" />
+          
+            <MudIconButton Icon="@Icons.Filled.AttachFile" Color="Color.Secondary" ButtonType="ButtonType.Button"></MudIconButton>
+            <MudIconButton Icon="@Icons.Filled.Image" Color="Color.Secondary" ButtonType="ButtonType.Button"></MudIconButton>
+            <MudIconButton Icon="@Icons.Material.Outlined.Send" Color="Color.Secondary" ButtonType="ButtonType.Button"></MudIconButton>
+
+     
+
+        </MudPaper>
+    </MudPaper>
+    <MudHidden Breakpoint="Breakpoint.SmAndDown">
+        <MudPaper Elevation="25" Class="pa-3 ml-6" MinWidth="350px">
+            <MudToolBar Dense="true">
+                <MudText Typo="Typo.h6" Inline="true" Class="mr-2">#</MudText>
+                <MudText Typo="Typo.h6">@L["Vaults"]</MudText>
+            </MudToolBar>
+            <div class="d-flex flex-column px-4" style="max-height:70vh;min-height:70vh; overflow:scroll;">
+                <MudList Clickable="true">
+                    @foreach (var user in UserList)
+                    {
+                        <MudListItem Class="pa-0 px-2">
+                            <div class="d-flex flex-row mt-n1 mb-n1">
+                                <div class="mr-4">
+                                    <MudBadge Class="my-2" Color="user.IsOnline?  Color.Success:Color.Info"  Overlap="true" Bottom="true" Dot="true">
+                                        @if (string.IsNullOrEmpty(user.ProfilePictureDataUrl))
+                                        {
+                                            @if (user.Id == CId)
+                                            {
+                                                <MudAvatar Color="Color.Secondary" Style="height:50px; width:50px;">@user.UserName.ToUpper().FirstOrDefault()</MudAvatar>
+                                            }
+                                            else
+                                            {
+                                                <MudAvatar Color="Color.Dark" Style="height:50px; width:50px;">@user.UserName.ToUpper().FirstOrDefault()</MudAvatar>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <MudAvatar Image="@user.ProfilePictureDataUrl" Style="height:50px; width:50px;"> </MudAvatar>
+                                        }
+                                    </MudBadge>
+                                </div>
+                                <div>
+                                    <MudText Typo="Typo.body2" Class="mt-3 mb-n2">@user.FirstName @user.LastName</MudText>
+                                    @*<MudText Typo="Typo.caption" Style="font-size: xx-small!important;">@user.EmailAddress</MudText>*@
+                                    <MudText Typo="Typo.caption" Style="font-size: xx-small!important;">@user.CreatedDate</MudText>
+
+                                </div>
+                            </div>
+                        </MudListItem>
+                    }
+                </MudList>
+            </div>
+        </MudPaper>
+    </MudHidden>
+</div>
+<MudDrawer Elevation="1" Variant="@DrawerVariant.Temporary">
+    <div class="pa-3">
+        <MudList Clickable="true">
+            @foreach (var user in UserList)
+            {
+                <MudListItem Class="pa-0 px-2">
+                    <div class="d-flex flex-row mt-n1 mb-n1">
+                        <div class="mr-4">
+                            <MudBadge Class="my-2" Color="@(GetUserStatusBadgeColor(user.IsOnline))" Overlap="true" Bottom="true" Dot="true">
+                                @if (string.IsNullOrEmpty(user.ProfilePictureDataUrl))
+                                {
+                                    @if (user.Id == CId)
+                                    {
+                                        <MudAvatar Color="Color.Secondary" Style="height: 50px; width: 50px;">@user.UserName.ToUpper().FirstOrDefault()</MudAvatar>
+                                    }
+                                    else
+                                    {
+                                        <MudAvatar Color="Color.Dark" Style="height: 50px; width: 50px;" >@user.UserName.ToUpper().FirstOrDefault()</MudAvatar>
+                                    }
+                                }
+                                else
+                                {
+                                    <MudAvatar Image="@user.ProfilePictureDataUrl" Style="height: 50px; width: 50px;"> </MudAvatar>
+                                }
+                            </MudBadge>
+                        </div>
+                        <div>
+                            <MudText Typo="Typo.body2" Class="mt-3 mb-n2">@user.FirstName @user.LastName</MudText>
+                            <MudText Typo="Typo.caption" Style="font-size: xx-small!important;">@user.EmailAddress</MudText>
+                        </div>
+                    </div>
+                </MudListItem>
+            }
+        </MudList>
+    </div>
+</MudDrawer>

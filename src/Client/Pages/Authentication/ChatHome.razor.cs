@@ -33,8 +33,13 @@ public partial class ChatHome
         }
     }
 
-    private readonly TokenRequest _tokenRequest = new();
-    private string TenantId { get; set; } = string.Empty;
+    private readonly TokenRequest _tokenRequest = new()
+    {
+        Email = "ayman.sharkawy609@gmail.com",
+        Password = "123Pa$$word!"
+
+    };
+    private string TenantId { get; set; } = "root";
     private bool _passwordVisibility;
     private InputType _passwordInput = InputType.Password;
     private string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
@@ -80,10 +85,10 @@ public partial class ChatHome
     private async Task SubmitAsync()
     {
         BusySubmitting = true;
-        await Task.Delay(5000);
+        await Task.Delay(2000);
         BusySubmitting = false;
-
-
+        await LoginAsync();
+        Navigation.NavigateTo("/chat");
 
     }
     public async Task RemoveImageAsync()
@@ -106,5 +111,19 @@ public partial class ChatHome
             //_profileModel.DeleteCurrentImage = true;
             //await UpdateProfileAsync();
         }
+    }
+    private async Task LoginAsync()
+    {
+        BusySubmitting = true;
+
+        if (await ApiHelper.ExecuteCallGuardedAsync(
+            () => AuthService.LoginAsync(TenantId, _tokenRequest),
+            Snackbar,
+            _customValidation))
+        {
+            Snackbar.Add($"Welcome! You are currently logged in as an anonymous user.", Severity.Info);
+        }
+
+        BusySubmitting = false;
     }
 }

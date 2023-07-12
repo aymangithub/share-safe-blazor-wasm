@@ -76,7 +76,7 @@ public class JwtAuthenticationService : AuthenticationStateProvider, IAuthentica
 
         NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
 
-        _navigation.NavigateTo("/login");
+        _navigation.NavigateTo("/chathome");
     }
 
     public async Task ReLoginAsync(string returnUrl)
