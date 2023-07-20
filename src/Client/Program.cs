@@ -1,8 +1,12 @@
 using System.Globalization;
+using System.Reflection;
 using FSH.BlazorWebAssembly.Client;
+using FSH.BlazorWebAssembly.Client.AutoMapper;
 using FSH.BlazorWebAssembly.Client.Infrastructure;
 using FSH.BlazorWebAssembly.Client.Infrastructure.Common;
 using FSH.BlazorWebAssembly.Client.Infrastructure.Preferences;
+using FSH.BlazorWebAssembly.Client.Infrastructure.Services;
+using FSH.BlazorWebAssembly.Client.Services;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
@@ -12,6 +16,10 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddClientServices(builder.Configuration);
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.AddSingleton<IChatComponentFactory, ChatComponentFactory>();
+
 
 var host = builder.Build();
 

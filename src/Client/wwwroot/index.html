@@ -14,6 +14,11 @@
     <link href="manifest.json" rel="manifest" />
     <link rel="apple-touch-icon" sizes="512x512" href="share-safe-logo.png" />
     <link rel="apple-touch-icon" sizes="192x192" href="share-safe-logo.png" />
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-JKkvk5PwOMS29BEvysDPyYedt2Ujd7c"></script>
+    <script src="googleMaps.js"></script>
+
+
+
 </head>
 
 <body>
@@ -105,6 +110,82 @@
             anchorElement.remove();
         }
     </script>
+
+    <script>
+        window.downloadFile = (filename, data) => {
+            const byteCharacters = atob(data);
+            for (let i = 0; i < byteCharacters.length; i++) {
+                byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
+            const blob = new Blob([byteArray], { type: 'application/pdf' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        };
+
+        window.shareUrl = (title, text, url) => {
+            if (navigator.share) {
+                navigator.share({
+                    title: title,
+                    text: text,
+                    url: url,
+                })
+                    .then(() => console.log('Successful share'))
+                    .catch((error) => console.log('Error sharing', error));
+            } else {
+                // Fallback for devices that do not support the Web Share API
+                console.log('Web Share API not supported');
+            }
+        }
+
+        window.scrollToBottom = () => {
+            var chatContainer = document.getElementById('chatContainer');
+            var lastMessage = chatContainer.lastElementChild;
+            if (lastMessage) {
+                window.requestAnimationFrame(() => {
+                    lastMessage.scrollIntoView({ behavior: 'smooth' });
+                });
+            }
+        };
+        window.isScrollAtBottom = () => {
+
+            const chatContainer = document.getElementById('chatContainer');
+            if (chatContainer) {
+                return (chatContainer.offsetHeight + chatContainer.scrollTop) >= chatContainer.scrollHeight;
+            }
+            return false;
+        };
+
+        //function initializeScrollCheck() {
+        //    const chatContainer = document.getElementById('chatContainer');
+        //    if (chatContainer) {
+        //        chatContainer.onscroll = function () {
+        //            DotNet.invokeMethodAsync('FSH.BlazorWebAssembly.Client', 'UpdateShowFab');
+        //        }
+        //    }
+        //}
+
+     /*   window.onload = initializeScrollCheck;*/
+
+        function initializeScrollCheck(dotNetReference) {
+            const chatContainer = document.getElementById('chatContainer');
+            if (chatContainer) {
+                chatContainer.onscroll = function () {
+                    dotNetReference.invokeMethodAsync('UpdateShowFab');
+                }
+            }
+        }
+
+
+    </script>
+
+    <script src="js/sound.js"></script>
+
 </body>
 
 </html>

@@ -1,0 +1,72 @@
+﻿@inject IStringLocalizer<TermsPrivacy> L
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.PrivacyTip" Class="mr-3 mb-n1" />
+            @L["Terms Privacy"]
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <h2>Terms of Use &amp; Data Protection Information of DemoChat Assistance Online</h2>
+
+        <h3>Key Notes on Services</h3>
+        <p>The DemoChat Assistance online can be used by DemoChat members and non-members. Use doesn't establish a claim to DemoChat services. Eligibility depends on your membership status and its terms.</p>
+
+        <h3>Telephone &amp; Data Connection Usage</h3>
+        <p>A data and occasionally telephone connection is required for using DemoChat Assistance online. The costs for calls and data depend on your network operator/provider.</p>
+
+        <h3>Personal Data Processing</h3>
+        <p>We inform you about the collection and processing of your personal data when using our web service. Personal data includes data like your name, address, email addresses, or user behavior.</p>
+        <p>Responsible entity according to Article 4, Para 7 EU General Data Protection Regulation (GDPR) is DemoChat Inc., Digital Road 88, 90210 Silicon City, demo@demochat.ai.</p>
+        <p>Our data protection officer can be reached at:</p>
+        <p>
+            Data Protection and Security<br>
+            Digital Road 88<br>
+            90210 Silicon City<br>
+            Fax: (123) 456-7890<br>
+            Email: dpo@demochat.ai
+        </p>
+
+        <h3>Purpose of Processing</h3>
+        <p>The purpose of the web service is system-supported case acceptance, subsequent organization, and provision of assistance service and any related downstream services.</p>
+
+        <h3>Use of Cookies</h3>
+        <p>Our web service uses a cookie to control the current status information if you have consented to its use. The cookie is temporarily saved on your device when the assistance message is sent and will be deleted after 72 hours.</p>
+
+        <h3>Tracking</h3>
+        <p>Information on tracking is in our general data protection information.</p>
+
+        <h3>Data Transmission</h3>
+        <p>Data collected as part of our web service are encrypted and transferred to our central IT systems for further processing. The data is exclusively used for our services and may be passed on to deployed service providers, but not to third parties.</p>
+
+        <h3>Data Storage</h3>
+        <p>Your data entered on the website is saved on the device until you close the website. In addition, your personal data will be deleted when it's no longer necessary for the mentioned purposes.</p>
+
+        <h3>Your Rights</h3>
+        <p>You have the right to information, correction or deletion, restriction of processing, objection to processing, and data portability. You also have the right to complain to a data protection supervisory authority about the processing of your personal data in our company.</p>
+
+        <h3>Provider</h3>
+        <p>The provider of the web service is DemoChat Inc. (see imprint)</p>
+        <p>
+            Telephone: + 123 456 7890<br>
+            Fax: + 123 456 7891<br>
+            Email: assistance-app@demochat.ai<br>
+            <a href="https://www.demochat.ai">https://www.demochat.ai</a>
+        </p>
+
+        <p>As of July 2023</p>
+
+    </DialogContent>
+    <DialogActions>
+        <MudButton StartIcon="@Icons.Filled.Cancel" OnClick="Cancel">@L["Close"]</MudButton>
+
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    MudDialogInstance MudDialog { get; set; } = default!;
+
+    void Cancel() => MudDialog.Cancel();
+}

@@ -9,8 +9,10 @@ using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.JSInterop;
 using MudBlazor;
 using MudBlazor.Extensions;
+using System;
 
 namespace FSH.BlazorWebAssembly.Client.Pages.Authentication;
 
@@ -20,7 +22,8 @@ public partial class ChatHome
     public Task<AuthenticationState> AuthState { get; set; } = default!;
     [Inject]
     public IAuthenticationService AuthService { get; set; } = default!;
-
+    [Inject]
+    public IJSRuntime JSRuntime { get; set; }
     private CustomValidation? _customValidation;
 
     public bool BusySubmitting { get; set; }
@@ -89,9 +92,10 @@ public partial class ChatHome
         BusySubmitting = false;
         await LoginAsync();
         Navigation.NavigateTo("/chat");
+        await JSRuntime.InvokeVoidAsync("playSound", "sounds/vault-created.mp3");
 
     }
-    public async Task RemoveImageAsync()
+    public async Task JoinChat()
     {
         string deleteContent = L["Please enter the code from the chat owner."];
         var parameters = new DialogParameters();
@@ -101,15 +105,24 @@ public partial class ChatHome
 
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
 
-        var dialog = DialogService.Show<JoinChatConfirmation>(L["Delete"], parameters, options);
+        var dialog = DialogService.Show<JoinChatConfirmation>(L["JoinChatConfirmation"], parameters, options);
         var result = await dialog.Result;
         if (!result.Cancelled)
         {
             Joining = true;
             await Task.Delay(2000);
             Joining = false;
-            //_profileModel.DeleteCurrentImage = true;
-            //await UpdateProfileAsync();
+
+            var endCoderesult = await DialogService.ShowMessageBox("End Joining Code", "(859) This share the code with the vault owner.", yesText: "Done", cancelText: "Cancel");
+            if (endCoderesult == true)
+            {
+                await LoginAsync();
+                Navigation.NavigateTo("/chat");
+                await JSRuntime.InvokeVoidAsync("playSound", "sounds/user-joined-successfully.mp3");
+            }
+
+
+
         }
     }
     private async Task LoginAsync()
@@ -126,4 +139,34 @@ public partial class ChatHome
 
         BusySubmitting = false;
     }
+    private async Task ShowTermsAndPrivacyDialog()
+    {
+
+
+        var parameters = new DialogParameters();
+
+
+        var options = new DialogOptions { MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true, CloseOnEscapeKey = true };
+
+        var dialog = DialogService.Show<TermsPrivacy>(L["TermsPrivacy"], parameters, options);
+
+
+
+    }
+    private async Task ShowInPrintDialog()
+    {
+
+
+        var parameters = new DialogParameters();
+
+
+        var options = new DialogOptions { MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = false, CloseOnEscapeKey = true };
+
+        var dialog = DialogService.Show<ImPrint>(L["InPrint"], parameters, options);
+
+
+
+    }
+
+
 }

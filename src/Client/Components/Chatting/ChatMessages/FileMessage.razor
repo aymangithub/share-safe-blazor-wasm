@@ -1,0 +1,54 @@
+﻿@using AdminDashboard.Wasm.Models.ChattingMessage;
+@inject IJSRuntime JSRuntime
+@using System.Globalization
+@using FSH.BlazorWebAssembly.Client.Infrastructure.Dto.ChattingMessage;
+@inject HttpClient Http
+@inherits BaseMessageComponent<FileMessageViewModel>;
+
+<div class="d-flex flex-row my-4 @(IsUserMessage?"my-chat-message":"others-chat-message")" dir="@(IsUserMessage?"rtl":"ltr")">
+
+
+    <div>
+        @* <MudText Typo="Typo.body1">@_messages[0].FromUserFullName</MudText>*@
+        <MudText Typo="Typo.caption" Style="font-size: xx-small!important;">@Message?.CreatedDate.ToString("G", CultureInfo.CurrentCulture)</MudText>
+
+
+        @*  <MudCard>
+        <MudImage Src="Screenshot 2023-07-13 013040.png" />
+        <MudText Typo="Typo.body1" Class="mt-0 ml-2">
+        32423434.pdf
+
+        <MudIconButton Icon="@Icons.Material.Outlined.Edit" Color="Color.Inherit" Class="ml-3" />
+
+        </MudText>
+
+        <MudButton StartIcon="@Icons.Material.Outlined.OpenInBrowser" Typography="Typo.body1" Class="ml-3">Open</MudButton>
+        <MudButton StartIcon="@Icons.Material.Outlined.Download" OnClick="DownloadFile" Typography="Typo.body1" Class="ml-3">Download</MudButton>
+        </MudCard>*@
+
+        <MudCard>
+            <MudCardContent>
+                <MudImage Src="Screenshot 2023-07-13 013040.png" />
+                <MudText Typo="Typo.body1" Class="mt-0 ml-2">
+                    32423434.pdf
+                    <MudIconButton Icon="@Icons.Material.Outlined.Edit" Color="Color.Inherit" Class="ml-1" />
+                </MudText>
+            </MudCardContent>
+
+            <MudCardActions>
+                <MudButton StartIcon="@Icons.Material.Outlined.OpenInBrowser" Typography="Typo.body1" Class="ml-1">Open</MudButton>
+                <MudButton StartIcon="@Icons.Material.Outlined.Download" OnClick="DownloadFile" Typography="Typo.body1" Class="ml-1">Download</MudButton>
+            </MudCardActions>
+        </MudCard>
+
+    </div>
+</div>
+
+@code {
+    private async Task DownloadFile()
+    {
+        var fileBytes = await Http.GetByteArrayAsync("sample.pdf");
+        var base64String = Convert.ToBase64String(fileBytes);
+        await JSRuntime.InvokeVoidAsync("downloadFile", "sample.pdf", base64String);
+    }
+}

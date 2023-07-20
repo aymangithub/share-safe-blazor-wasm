@@ -1,0 +1,52 @@
+﻿@inject IStringLocalizer<ImPrint> L
+
+<MudDialog >
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.PrivacyTip" Class="mr-3 mb-n1" />
+            @L["Imprint"]
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <h2>Imprint</h2>
+        <p>The website appchatdemo.ai is a product of TechDemo Corp., Silicon City. It is a division of Virtual Reality Corp.</p>
+
+        <h3>Responsible</h3>
+        <p>
+            TechDemo Corp.<br>
+            Silicon Drive 77<br>
+            85100 Silicon City<br>
+        </p>
+
+        <p>
+            Management: John Smith (Chairman), Jane Doe, Richard Roe, Alice Johnson, Bob Baker, Dr. Charlie Carter<br>
+            Register court: District Court of Silicon City<br>
+            Commercial register number: HRB 999999<br>
+            VAT ID: DE888888888
+        </p>
+
+        <p>
+            Tel: +11 11 1111 1111<br>
+            E-Mail: info@appchatdemo.ai
+        </p>
+
+        <h3>Copyrights</h3>
+        <p>© Copyright TechDemo Corp., Silicon City (Country). All rights reserved. Text, images, graphics, sound, animations and videos and their arrangement on the TechDemo Corp. website are protected by copyright and other protective laws. The content of this website may not be copied, distributed, modified or made accessible to third parties for commercial purposes. We would like to point out that some of the images contained on the websites are subject to the copyright of third parties.</p>
+
+        <h3>Legal notice</h3>
+        <p>Any partial or commercial use requires the prior written approval of TechDemo Corp.</p>
+
+    </DialogContent>
+    <DialogActions>
+        <MudButton StartIcon="@Icons.Filled.Cancel" OnClick="Cancel">@L["Close"]</MudButton>
+
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    MudDialogInstance MudDialog { get; set; } = default!;
+
+
+    void Cancel() => MudDialog.Cancel();
+}

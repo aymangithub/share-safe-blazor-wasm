@@ -3,6 +3,25 @@
 @inject IStringLocalizer<ChatHome> L
 @inject IStringLocalizer<SharedResource> LS
 
+<MudAppBar Elevation="0">
+   
+    <MudSpacer />
+    <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
+      
+        <MudTooltip Text="Support">
+            <MudIconButton Icon="@Icons.Filled.SupportAgent" Color="Color.Inherit" />
+        </MudTooltip>
+        <MudDivider Vertical="true" FlexItem="true" DividerType="DividerType.Middle" Class="mx-4 my-5" />
+
+
+        <LanguageSelector />
+
+      
+    </MudHidden>
+   
+</MudAppBar>
+
+
 <div class="d-flex justify-center">
     <img src="share-safe-logo.png" Style="height:120px" />
 </div>
@@ -25,18 +44,24 @@
             </MudButton>
         </MudItem>
         <MudItem xs="12" Class="d-flex justify-center">
-            <MudButton OnClick="!IsThereSubmitting ?RemoveImageAsync: null" Variant="Variant.Filled"
+            <MudButton OnClick="!IsThereSubmitting ?JoinChat: null" Variant="Variant.Filled"
                        Color="Color.Primary" Size="Size.Large" StartIcon="@(!Joining ? Icons.Filled.GroupAdd : Icons.Filled.AvTimer)" Style="width: 100%;">
                 @(Joining == true ? L["Joining to Chatting...."] : L["Join Chat"])
 
             </MudButton>
 
         </MudItem>
-        <MudItem xs="9" md="6">
-            <MudButton StartIcon="@Icons.Filled.AppRegistration" >@L["Need Help?"]</MudButton>
+    @*    <MudItem xs="6" md="6">
+            <MudButton StartIcon="@Icons.Filled.Help" >@L["Need Help?"]</MudButton>
+        </MudItem>*@
+     @*   <MudItem xs="6">
+            <LanguageSelector ShowButtonList="false" />
+        </MudItem>*@
+        <MudItem xs="12" md="9">
+            <MudButton OnClick="ShowTermsAndPrivacyDialog" StartIcon="@Icons.Filled.PrivacyTip">@L["Terms And Privacy Policy"]</MudButton>
         </MudItem>
-        <MudItem xs="12">
-            <LanguageSelector ShowButtonList="true" />
+        <MudItem xs="6" md="3">
+            <MudButton OnClick="ShowInPrintDialog" StartIcon="@Icons.Filled.Newspaper">@L["Imprint"]</MudButton>
         </MudItem>
 
     </MudGrid>

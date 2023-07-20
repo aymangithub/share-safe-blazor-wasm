@@ -1,8 +1,11 @@
 ﻿using System.Globalization;
 using FSH.BlazorWebAssembly.Client.Infrastructure.ApiClient;
 using FSH.BlazorWebAssembly.Client.Infrastructure.Auth;
+using FSH.BlazorWebAssembly.Client.Infrastructure.Dto.ChattingMessage;
+using FSH.BlazorWebAssembly.Client.Infrastructure.Dto.Vault;
 using FSH.BlazorWebAssembly.Client.Infrastructure.Notifications;
 using FSH.BlazorWebAssembly.Client.Infrastructure.Preferences;
+using FSH.BlazorWebAssembly.Client.Infrastructure.Services;
 using FSH.WebApi.Shared.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
@@ -43,7 +46,11 @@ public static class Startup
                 })
                 .AddAuthenticationHandler(config)
                 .Services
-            .AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient(ClientName));
+            .AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient(ClientName))
+        .AddScoped<IService<BasicMessageDto>, MessageService>()
+        .AddScoped<IService<VaultDto>, VaultService>()
+
+        ;
 
     private static void RegisterPermissionClaims(AuthorizationOptions options)
     {

@@ -1,0 +1,308 @@
+ª   ª   ª   ª       Account.ru.resx
+ª   ª   ª   ª       Account.sv.resx
+ª   ª   ª   ª       Profile.ar.resx
+ª   ª   ª   ª       Profile.de.resx
+ª   ª   ª   ª       Profile.en.resx
+ª   ª   ª   ª       Profile.es.resx
+ª   ª   ª   ª       Profile.fr.resx
+ª   ª   ª   ª       Profile.id.resx
+ª   ª   ª   ª       Profile.it.resx
+ª   ª   ª   ª       Profile.km.resx
+ª   ª   ª   ª       Profile.nl.resx
+ª   ª   ª   ª       Profile.pt.resx
+ª   ª   ª   ª       Profile.ru.resx
+ª   ª   ª   ª       Profile.sv.resx
+ª   ª   ª   ª       Security.ar.resx
+ª   ª   ª   ª       Security.de.resx
+ª   ª   ª   ª       Security.en.resx
+ª   ª   ª   ª       Security.es.resx
+ª   ª   ª   ª       Security.fr.resx
+ª   ª   ª   ª       Security.id.resx
+ª   ª   ª   ª       Security.it.resx
+ª   ª   ª   ª       Security.km.resx
+ª   ª   ª   ª       Security.nl.resx
+ª   ª   ª   ª       Security.pt.resx
+ª   ª   ª   ª       Security.ru.resx
+ª   ª   ª   ª       Security.sv.resx
+ª   ª   ª   ª       
+ª   ª   ª   +---Roles
+ª   ª   ª   ª       RolePermissions.ar.resx
+ª   ª   ª   ª       RolePermissions.de.resx
+ª   ª   ª   ª       RolePermissions.en.resx
+ª   ª   ª   ª       RolePermissions.es.resx
+ª   ª   ª   ª       RolePermissions.fr.resx
+ª   ª   ª   ª       RolePermissions.id.resx
+ª   ª   ª   ª       RolePermissions.it.resx
+ª   ª   ª   ª       RolePermissions.km.resx
+ª   ª   ª   ª       RolePermissions.nl.resx
+ª   ª   ª   ª       RolePermissions.pt.resx
+ª   ª   ª   ª       RolePermissions.ru.resx
+ª   ª   ª   ª       RolePermissions.sv.resx
+ª   ª   ª   ª       Roles.ar.resx
+ª   ª   ª   ª       Roles.de.resx
+ª   ª   ª   ª       Roles.en.resx
+ª   ª   ª   ª       Roles.es.resx
+ª   ª   ª   ª       Roles.fr.resx
+ª   ª   ª   ª       Roles.id.resx
+ª   ª   ª   ª       Roles.it.resx
+ª   ª   ª   ª       Roles.km.resx
+ª   ª   ª   ª       Roles.nl.resx
+ª   ª   ª   ª       Roles.pt.resx
+ª   ª   ª   ª       Roles.ru.resx
+ª   ª   ª   ª       Roles.sv.resx
+ª   ª   ª   ª       
+ª   ª   ª   +---Users
+ª   ª   ª           UserProfile.ar.resx
+ª   ª   ª           UserProfile.de.resx
+ª   ª   ª           UserProfile.en.resx
+ª   ª   ª           UserProfile.es.resx
+ª   ª   ª           UserProfile.fr.resx
+ª   ª   ª           UserProfile.id.resx
+ª   ª   ª           UserProfile.it.resx
+ª   ª   ª           UserProfile.km.resx
+ª   ª   ª           UserProfile.nl.resx
+ª   ª   ª           UserProfile.pt.resx
+ª   ª   ª           UserProfile.ru.resx
+ª   ª   ª           UserProfile.sv.resx
+ª   ª   ª           UserRoles.ar.resx
+ª   ª   ª           UserRoles.de.resx
+ª   ª   ª           UserRoles.en.resx
+ª   ª   ª           UserRoles.es.resx
+ª   ª   ª           UserRoles.fr.resx
+ª   ª   ª           UserRoles.id.resx
+ª   ª   ª           UserRoles.it.resx
+ª   ª   ª           UserRoles.km.resx
+ª   ª   ª           UserRoles.nl.resx
+ª   ª   ª           UserRoles.pt.resx
+ª   ª   ª           UserRoles.ru.resx
+ª   ª   ª           UserRoles.sv.resx
+ª   ª   ª           Users.ar.resx
+ª   ª   ª           Users.de.resx
+ª   ª   ª           Users.en.resx
+ª   ª   ª           Users.es.resx
+ª   ª   ª           Users.fr.resx
+ª   ª   ª           Users.id.resx
+ª   ª   ª           Users.it.resx
+ª   ª   ª           Users.km.resx
+ª   ª   ª           Users.nl.resx
+ª   ª   ª           Users.pt.resx
+ª   ª   ª           Users.ru.resx
+ª   ª   ª           Users.sv.resx
+ª   ª   ª           
+ª   ª   +---Misc
+ª   ª   ª       AddEditDocumentModal.ar.resx
+ª   ª   ª       AddEditDocumentModal.de.resx
+ª   ª   ª       AddEditDocumentModal.en.resx
+ª   ª   ª       AddEditDocumentModal.es.resx
+ª   ª   ª       AddEditDocumentModal.fr.resx
+ª   ª   ª       AddEditDocumentModal.id.resx
+ª   ª   ª       AddEditDocumentModal.it.resx
+ª   ª   ª       AddEditDocumentModal.km.resx
+ª   ª   ª       AddEditDocumentModal.nl.resx
+ª   ª   ª       AddEditDocumentModal.pt.resx
+ª   ª   ª       AddEditDocumentModal.ru.resx
+ª   ª   ª       AddEditDocumentModal.sv.resx
+ª   ª   ª       AddEditDocumentTypeModal.ar.resx
+ª   ª   ª       AddEditDocumentTypeModal.de.resx
+ª   ª   ª       AddEditDocumentTypeModal.en.resx
+ª   ª   ª       AddEditDocumentTypeModal.es.resx
+ª   ª   ª       AddEditDocumentTypeModal.fr.resx
+ª   ª   ª       AddEditDocumentTypeModal.km.resx
+ª   ª   ª       AddEditDocumentTypeModal.nl.resx
+ª   ª   ª       AddEditDocumentTypeModal.pt.resx
+ª   ª   ª       AddEditDocumentTypeModal.ru.resx
+ª   ª   ª       DocumentStore.ar.resx
+ª   ª   ª       DocumentStore.de.resx
+ª   ª   ª       DocumentStore.en.resx
+ª   ª   ª       DocumentStore.es.resx
+ª   ª   ª       DocumentStore.fr.resx
+ª   ª   ª       DocumentStore.id.resx
+ª   ª   ª       DocumentStore.it.resx
+ª   ª   ª       DocumentStore.km.resx
+ª   ª   ª       DocumentStore.nl.resx
+ª   ª   ª       DocumentStore.pt.resx
+ª   ª   ª       DocumentStore.ru.resx
+ª   ª   ª       DocumentStore.sv.resx
+ª   ª   ª       DocumentTypes.ar.resx
+ª   ª   ª       DocumentTypes.de.resx
+ª   ª   ª       DocumentTypes.en.resx
+ª   ª   ª       DocumentTypes.es.resx
+ª   ª   ª       DocumentTypes.fr.resx
+ª   ª   ª       DocumentTypes.km.resx
+ª   ª   ª       DocumentTypes.nl.resx
+ª   ª   ª       DocumentTypes.pt.resx
+ª   ª   ª       DocumentTypes.ru.resx
+ª   ª   ª       
+ª   ª   +---Multitenancy
+ª   ª   ª       Tenants.de.resx
+ª   ª   ª       Tenants.en.resx
+ª   ª   ª       Tenants.it.resx
+ª   ª   ª       Tenants.pt.resx
+ª   ª   ª       UpgradeSubscriptionModal.de.resx
+ª   ª   ª       UpgradeSubscriptionModal.en.resx
+ª   ª   ª       UpgradeSubscriptionModal.it.resx
+ª   ª   ª       UpgradeSubscriptionModal.pt.resx
+ª   ª   ª       
+ª   ª   +---Personal
+ª   ª           AuditLogs.ar.resx
+ª   ª           AuditLogs.de.resx
+ª   ª           AuditLogs.en.resx
+ª   ª           AuditLogs.es.resx
+ª   ª           AuditLogs.fr.resx
+ª   ª           AuditLogs.it.resx
+ª   ª           AuditLogs.km.resx
+ª   ª           AuditLogs.nl.resx
+ª   ª           AuditLogs.pt.resx
+ª   ª           AuditLogs.ru.resx
+ª   ª           AuditLogs.sv.resx
+ª   ª           Dashboard.ar.resx
+ª   ª           Dashboard.de.resx
+ª   ª           Dashboard.en.resx
+ª   ª           Dashboard.es.resx
+ª   ª           Dashboard.fr.resx
+ª   ª           Dashboard.id.resx
+ª   ª           Dashboard.it.resx
+ª   ª           Dashboard.km.resx
+ª   ª           Dashboard.nl.resx
+ª   ª           Dashboard.pt.resx
+ª   ª           Dashboard.ru.resx
+ª   ª           Dashboard.sv.resx
+ª   ª           
+ª   +---Shared
+ª       ª   MainLayout.de.resx
+ª       ª   MainLayout.en.resx
+ª       ª   MainLayout.es.resx
+ª       ª   MainLayout.fr.resx
+ª       ª   MainLayout.id.resx
+ª       ª   MainLayout.it.resx
+ª       ª   MainLayout.km.resx
+ª       ª   MainLayout.nl.resx
+ª       ª   MainLayout.pt.resx
+ª       ª   MainLayout.ru.resx
+ª       ª   MainLayout.sv.resx
+ª       ª   NavMenu.de.resx
+ª       ª   NavMenu.en.resx
+ª       ª   NavMenu.es.resx
+ª       ª   NavMenu.fr.resx
+ª       ª   NavMenu.id.resx
+ª       ª   NavMenu.it.resx
+ª       ª   NavMenu.km.resx
+ª       ª   NavMenu.nl.resx
+ª       ª   NavMenu.pt.resx
+ª       ª   NavMenu.ru.resx
+ª       ª   NavMenu.sv.resx
+ª       ª   NotFoundLayout.de.resx
+ª       ª   NotFoundLayout.en.resx
+ª       ª   NotFoundLayout.es.resx
+ª       ª   NotFoundLayout.fr.resx
+ª       ª   NotFoundLayout.id.resx
+ª       ª   NotFoundLayout.it.resx
+ª       ª   NotFoundLayout.km.resx
+ª       ª   NotFoundLayout.nl.resx
+ª       ª   NotFoundLayout.pt.resx
+ª       ª   NotFoundLayout.ru.resx
+ª       ª   NotFoundLayout.sv.resx
+ª       ª   SharedResource.de.resx
+ª       ª   SharedResource.en.resx
+ª       ª   SharedResource.it.resx
+ª       ª   ??MainLayout.ar.resx
+ª       ª   ??NavMenu.ar.resx
+ª       ª   ??NotFoundLayout.ar.resx
+ª       ª   
+ª       +---Components
+ª       ª       AddEditExtendedAttributeModalLocalization.ar.resx
+ª       ª       AddEditExtendedAttributeModalLocalization.de.resx
+ª       ª       AddEditExtendedAttributeModalLocalization.en.resx
+ª       ª       AddEditExtendedAttributeModalLocalization.es.resx
+ª       ª       AddEditExtendedAttributeModalLocalization.fr.resx
+ª       ª       AddEditExtendedAttributeModalLocalization.id.resx
+ª       ª       AddEditExtendedAttributeModalLocalization.it.resx
+ª       ª       AddEditExtendedAttributeModalLocalization.km.resx
+ª       ª       AddEditExtendedAttributeModalLocalization.nl.resx
+ª       ª       AddEditExtendedAttributeModalLocalization.pt.resx
+ª       ª       AddEditExtendedAttributeModalLocalization.ru.resx
+ª       ª       AddEditExtendedAttributeModalLocalization.sv.resx
+ª       ª       ExtendedAttributesLocalization.ar.resx
+ª       ª       ExtendedAttributesLocalization.de.resx
+ª       ª       ExtendedAttributesLocalization.en.resx
+ª       ª       ExtendedAttributesLocalization.es.resx
+ª       ª       ExtendedAttributesLocalization.fr.resx
+ª       ª       ExtendedAttributesLocalization.id.resx
+ª       ª       ExtendedAttributesLocalization.it.resx
+ª       ª       ExtendedAttributesLocalization.km.resx
+ª       ª       ExtendedAttributesLocalization.nl.resx
+ª       ª       ExtendedAttributesLocalization.pt.resx
+ª       ª       ExtendedAttributesLocalization.ru.resx
+ª       ª       ExtendedAttributesLocalization.sv.resx
+ª       ª       ImportExcelModal.ar.resx
+ª       ª       ImportExcelModal.de.resx
+ª       ª       ImportExcelModal.en.resx
+ª       ª       ImportExcelModal.es.resx
+ª       ª       ImportExcelModal.fr.resx
+ª       ª       ImportExcelModal.id.resx
+ª       ª       ImportExcelModal.it.resx
+ª       ª       ImportExcelModal.km.resx
+ª       ª       ImportExcelModal.nl.resx
+ª       ª       ImportExcelModal.pt.resx
+ª       ª       ImportExcelModal.ru.resx
+ª       ª       ImportExcelModal.sv.resx
+ª       ª       LanguageSelector.ar.resx
+ª       ª       LanguageSelector.de.resx
+ª       ª       LanguageSelector.en.resx
+ª       ª       LanguageSelector.es.resx
+ª       ª       LanguageSelector.fr.resx
+ª       ª       LanguageSelector.id.resx
+ª       ª       LanguageSelector.it.resx
+ª       ª       LanguageSelector.nl.resx
+ª       ª       LanguageSelector.pt.resx
+ª       ª       LanguageSelector.ru.resx
+ª       ª       
+ª       +---Dialogs
+ª               DeleteConfirmation.en.resx
+ª               DeleteConfirmation.es.resx
+ª               DeleteConfirmation.fr.resx
+ª               DeleteConfirmation.id.resx
+ª               DeleteConfirmation.it.resx
+ª               DeleteConfirmation.km.resx
+ª               DeleteConfirmation.nl.resx
+ª               DeleteConfirmation.pt.resx
+ª               DeleteConfirmation.ru.resx
+ª               DeleteConfirmation.sv.resx
+ª               Logout.en.resx
+ª               Logout.es.resx
+ª               Logout.fr.resx
+ª               Logout.id.resx
+ª               Logout.it.resx
+ª               Logout.km.resx
+ª               Logout.nl.resx
+ª               Logout.pt.resx
+ª               Logout.ru.resx
+ª               Logout.sv.resx
+ª               ??DeleteConfirmation.ar.resx
+ª               ??Logout.ar.resx
+ª               
++---Shared
+ª       ApiHelper.cs
+ª       BaseLayout.razor
+ª       BaseLayout.razor.cs
+ª       DialogServiceExtensions.cs
+ª       MainLayout.razor
+ª       MainLayout.razor.cs
+ª       NavMenu.razor
+ª       NavMenu.razor.cs
+ª       NotFound.razor
+ª       SharedResource.cs
+ª       
++---wwwroot
+    ª   appsettings.Development.json
+    ª   appsettings.json
+    ª   favicon.ico
+    ª   share-safe-logo.png
+    ª   index.html
+    ª   manifest.json
+    ª   service-worker.js
+    ª   service-worker.published.js
+    ª   
+    +---css
+            fsh.css
+ECHO is off.

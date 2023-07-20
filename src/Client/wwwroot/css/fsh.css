@@ -70,3 +70,32 @@
 .fsh-nav-child {
     padding-left: 10px !important;
 }
+.mud-primary-bg {
+    background-color: var(--mud-palette-primary);
+}
+
+.mud-secondary-bg {
+    background-color: var(--mud-palette-secondary);
+}
+.tools-color {
+    color: #ffffff !important;
+}
+.white-icon {
+    color: white !important;
+}
+
+.white-icon button{
+    color: white !important;
+}
+
+.others-chat-message > div{
+    background-color: var(--mud-palette-primary) !important;
+    padding: 5px;
+    color: white;
+}
+
+.my-chat-message > div{
+    background-color: var(--mud-palette-secondary) !important;
+    padding: 5px;
+    color: white;
+}
