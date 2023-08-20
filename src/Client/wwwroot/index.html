@@ -170,7 +170,7 @@
         //    }
         //}
 
-     /*   window.onload = initializeScrollCheck;*/
+        /*   window.onload = initializeScrollCheck;*/
 
         function initializeScrollCheck(dotNetReference) {
             const chatContainer = document.getElementById('chatContainer');
@@ -185,6 +185,38 @@
     </script>
 
     <script src="js/sound.js"></script>
+
+
+    <script id="handleVerificationInputMove">
+        window.autoAdvance = function (currentInputId, nextInputId) {
+            var currentInput = document.getElementById(currentInputId);
+            var nextInput = document.getElementById(nextInputId);
+            if (currentInput.value.length >= currentInput.maxLength) {
+                nextInput.focus();
+            }
+        };
+
+        function MoveCursorToNextField(index, CodeLength) {
+            if (index != CodeLength - 1) {
+                var element = document.getElementById("verification-code__input_" + (index + 1));
+                element.focus();
+            }
+
+        }
+        function MoveCursorToPreviousField(index) {
+            if (index > 0) {
+                var element = document.getElementById("verification-code__input_" + (index - 1));
+                if (element != null) {
+                    element.focus();
+                }
+            }
+        }
+        window.focusOnElement = function (id) {
+            document.getElementById(id).focus();
+        }
+    </script>
+    <script src="js/Dexie/3.2.4_dist_dexie.min.js"></script>
+    <script src="js/Dexie/dexieInterop.js"></script>
 
 </body>
 

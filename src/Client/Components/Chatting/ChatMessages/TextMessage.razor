@@ -10,17 +10,18 @@
 
     {
         <div>
-            @if (string.IsNullOrEmpty(Message.FromUserImageURL))
+            <MudAvatar Image="https://graph.facebook.com/1234567890/picture?type=normal" Style="height:50px; width:50px;"> </MudAvatar>
+         @*   @if (string.IsNullOrEmpty(Message.FromUserImageURL))
             {
                 <MudAvatar Color="Color.Secondary" Style="height:50px; width:50px;">@Message.FromUserFullName.ToUpper().FirstOrDefault()</MudAvatar>
             }
             else
             {
-                <MudAvatar Image="@Message.FromUserImageURL" Style="height:50px; width:50px;"> </MudAvatar>
-            }
+                <MudAvatar Image="https://graph.facebook.com/1234567890/picture?type=normal" Style="height:50px; width:50px;"> </MudAvatar>
+            }*@
         </div>
         <div>
-            <MudText Typo="Typo.body1">@Message.FromUserFullName</MudText>
+            <MudText Typo="Typo.body1">@Message.FromUserId</MudText>
             <MudText Typo="Typo.caption" Style="font-size: xx-small!important;">@Message.CreatedDate.ToString("G", CultureInfo.CurrentCulture)</MudText>
             <MudText Typo="Typo.body2" Style=" padding: 15px;border-radius: 5px;margin-top:5px">@Message.Message</MudText>
         </div>

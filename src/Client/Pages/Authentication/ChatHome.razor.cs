@@ -92,7 +92,7 @@ public partial class ChatHome
         BusySubmitting = false;
         await LoginAsync();
         Navigation.NavigateTo("/chat");
-        await JSRuntime.InvokeVoidAsync("playSound", "sounds/vault-created.mp3");
+        await SoundService.PlaySoundAsync(SoundEventTypes.NewVaultCreated);
 
     }
     public async Task JoinChat()
@@ -118,7 +118,8 @@ public partial class ChatHome
             {
                 await LoginAsync();
                 Navigation.NavigateTo("/chat");
-                await JSRuntime.InvokeVoidAsync("playSound", "sounds/user-joined-successfully.mp3");
+                await SoundService.PlaySoundAsync(SoundEventTypes.IJoined);
+
             }
 
 
@@ -130,7 +131,7 @@ public partial class ChatHome
         BusySubmitting = true;
 
         if (await ApiHelper.ExecuteCallGuardedAsync(
-            () => AuthService.LoginAsync(TenantId, _tokenRequest),
+            () => AuthService.LoginFakeAsync(TenantId, _tokenRequest),
             Snackbar,
             _customValidation))
         {

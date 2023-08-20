@@ -1,7 +1,7 @@
 ﻿@inject IStringLocalizer<JoinChatConfirmation> L
 
 
-   
+
 
 <MudDialog>
     <TitleContent>
@@ -14,14 +14,32 @@
 
     </TitleContent>
 
-          
+
 
     <DialogContent>
         <MudText>@ContentText</MudText>
         <MudGrid>
             <MudItem xs="12">
-                <MudTextField Disabled="IsJoining" T="string" Label="@L["Code"]" Variant="Variant.Outlined" @bind-Value="Code"
-                              For="@(() => Code)" Required />
+                @* <MudTextField Disabled="IsJoining" T="string" Label="@L["Code"]" Variant="Variant.Outlined" @bind-Value="Code"
+                For="@(() => Code)" Required />*@
+
+
+                <VerificationCodeInput IsDisabled="IsJoining" CorrectCode="1234" OnCorrectCode="HandleCorrectCode" OnWrongCode="HandleWrongCode" />
+
+                @code {
+        private async Task HandleCorrectCode()
+        {
+            if (!IsJoining)
+                SubmitJoiningCodeSuccess();
+        }
+
+        private async Task HandleWrongCode()
+        {
+            if (!IsJoining)
+                SubmitJoiningCodeFailed();
+        }
+                }
+
 
             </MudItem>
         </MudGrid>
@@ -30,7 +48,7 @@
     <DialogActions>
 
         <MudButton StartIcon="@Icons.Filled.Cancel" OnClick="IsJoining ? null : Cancel">@L["Cancel"]</MudButton>
-        <MudButton StartIcon="@Icons.Filled.Delete" Color="Color.Primary" Variant="Variant.Filled" OnClick="IsJoining ? null : SubmitJoiningCode">@(IsJoining ? @L["Joining"] : @L["Ok"]) </MudButton>
+        <MudButton StartIcon="@Icons.Filled.Delete" Color="Color.Primary" Variant="Variant.Filled" OnClick="IsJoining ? null : SubmitJoiningCodeSuccess">@(IsJoining ? @L["Joining"] : @L["Ok"]) </MudButton>
     </DialogActions>
 </MudDialog>
 
@@ -45,16 +63,27 @@
     public string? ContentText { get; set; }
     public bool IsJoining { get; set; }
     public string SecondJoinCode { get; set; }
-    async void SubmitJoiningCode()
+    async void SubmitJoiningCodeSuccess()
     {
         SecondJoinCode = null;
         IsJoining = true;
         await Task.Delay(2000);
         IsJoining = false;
         MudDialog.Close(DialogResult.Ok(Code));
-       
+        Snackbar.Add($"you joined successfully.", Severity.Info);
+
+
+    }
+    async void SubmitJoiningCodeFailed()
+    {
+        SecondJoinCode = null;
+        IsJoining = true;
+        await Task.Delay(2000);
+        IsJoining = false;
+       // MudDialog.Close(DialogResult.Ok(Code));
+
     }
     void Cancel() => MudDialog.Cancel();
-  
+
 
 }

@@ -1,15 +1,14 @@
 ﻿@using AdminDashboard.Wasm.Models.ChattingMessage;
 @using System.Globalization
 @inherits BaseMessageComponent<GeoMessageViewModel>;
+@inject IJSRuntime JSRuntime
 
 <div class="d-flex flex-row my-4 @(IsUserMessage?"my-chat-message":"others-chat-message")" dir="@(IsUserMessage?"rtl":"ltr")">
 
     <div>
-        @*  <MudText Typo="Typo.body1">@_messages[0].FromUserFullName</MudText>*@
         <MudText Typo="Typo.caption" Style="font-size: xx-small!important;">@Message?.CreatedDate.ToString("G", CultureInfo.CurrentCulture)</MudText>
 
         <MudCard style="cursor: pointer;">
-            @* <MudImage Src="maplocation.png" />*@
             <div id="map" style="height: 400px; width: 400px;"></div>
         </MudCard>
     </div>
@@ -23,6 +22,15 @@
         base.OnInitialized();
 
 
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+           
+            await JSRuntime.InvokeVoidAsync("initializeMap", "map", Message.Latitude, Message.Longitude, 10);
+        }
+        await base.OnAfterRenderAsync(firstRender);
     }
 
 }

@@ -1,8 +1,10 @@
 ﻿
 using AdminDashboard.Wasm.Models.ChattingMessage;
 using AdminDashboard.Wasm.Models.Vault;
+using FSH.BlazorWebAssembly.Client.Infrastructure.Dto;
 using FSH.BlazorWebAssembly.Client.Infrastructure.Dto.ChattingMessage;
 using FSH.BlazorWebAssembly.Client.Infrastructure.Dto.Vault;
+using FSH.BlazorWebAssembly.Client.Models;
 using global::AutoMapper;
 namespace FSH.BlazorWebAssembly.Client.AutoMapper;
 
@@ -12,32 +14,45 @@ public class MappingProfile
     {
         public MessageProfile()
         {
-           
 
-            CreateMap<BasicMessageDto, BasicMessageViewModel>()
+
+            CreateMap<BaseMessageDto, BasicMessageViewModel>()
            .Include<TextMessageDto, TextMessageViewModel>()
            .Include<FileMessageDto, FileMessageViewModel>()
            .Include<ImageMessageDto, ImageMessageViewModel>()
-           .Include<GeoMessageDto, GeoMessageViewModel>();
+           .Include<GeoMessageDto, GeoMessageViewModel>()
+           .Include<AudioMessageDto, AudioMessageViewModel>();
 
 
-            // add other Include lines for each subclass mapping
-
-            CreateMap<BasicMessageDto, BasicMessageViewModel>();
+            CreateMap<BaseMessageDto, BasicMessageViewModel>()
+                    .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(src => DateTimeOffset.FromUnixTimeMilliseconds(src.Timestamp).DateTime));
+            ;
             CreateMap<TextMessageDto, TextMessageViewModel>();
             CreateMap<FileMessageDto, FileMessageViewModel>();
             CreateMap<ImageMessageDto, ImageMessageViewModel>();
             CreateMap<GeoMessageDto, GeoMessageViewModel>();
+            CreateMap<AudioMessageDto, AudioMessageViewModel>();
+
 
 
         }
     }
 
-    public class VaultProfile : Profile
+    public class ConversationProfile : Profile
     {
-        public VaultProfile()
+        public ConversationProfile()
         {
             CreateMap<VaultDto, VaultViewModel>();
+
+            CreateMap<BaseConversationDto, BaseConversationViewModel>()
+           .Include<ConversationDto, ConversationViewModel>();
+
+            CreateMap<BaseConversationDto, BaseConversationViewModel>()
+                    .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(src => DateTimeOffset.FromUnixTimeMilliseconds(src.Timestamp).DateTime));
+            CreateMap<ConversationDto, ConversationViewModel>();
+
+
+
 
         }
     }

@@ -1,5 +1,7 @@
 ﻿using FSH.BlazorWebAssembly.Client.Infrastructure.Preferences;
 using FSH.BlazorWebAssembly.Client.Infrastructure.Theme;
+using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using MudBlazor;
 
 namespace FSH.BlazorWebAssembly.Client.Shared;
@@ -10,25 +12,15 @@ public partial class BaseLayout
     private MudTheme _currentTheme = new LightTheme();
     private bool _themeDrawerOpen;
     private bool _rightToLeft;
-
+    [Inject]
+    public IJSRuntime JSRuntime { get; set; }
     protected override async Task OnInitializedAsync()
     {
         _themePreference = await ClientPreferences.GetPreference() as ClientPreference;
         if (_themePreference == null) _themePreference = new ClientPreference();
         SetCurrentTheme(_themePreference);
+        //await JSRuntime.InvokeVoidAsync("initializeDatabase", "ShareSafe");
 
-        //Snackbar.Add("Like this boilerplate? ", Severity.Normal, config =>
-        //{
-        //    config.BackgroundBlurred = true;
-        //    config.Icon = Icons.Custom.Brands.GitHub;
-        //    config.Action = "Star us on Github!";
-        //    config.ActionColor = Color.Primary;
-        //    config.Onclick = snackbar =>
-        //    {
-        //        Navigation.NavigateTo("https://github.com/fullstackhero/blazor-wasm-boilerplate");
-        //        return Task.CompletedTask;
-        //    };
-        //});
     }
 
     private async Task ThemePreferenceChanged(ClientPreference themePreference)

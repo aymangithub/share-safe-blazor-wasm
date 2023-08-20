@@ -1,0 +1,54 @@
+﻿@using AdminDashboard.Wasm.Models.ChattingMessage;
+@using System.Globalization;
+@inherits BaseMessageComponent<AudioMessageViewModel>;
+
+<div class="d-flex flex-row my-4 @(IsUserMessage?"my-chat-message":"others-chat-message")" dir="@(IsUserMessage?"rtl":"ltr")">
+
+
+
+    @if (!IsUserMessage)
+
+    {
+        <div>
+            <MudAvatar Image="https://graph.facebook.com/1234567890/picture?type=normal" Style="height:50px; width:50px;"> </MudAvatar>
+         @*   @if (string.IsNullOrEmpty(Message.FromUserImageURL))
+            {
+                <MudAvatar Color="Color.Secondary" Style="height:50px; width:50px;">@Message.FromUserFullName.ToUpper().FirstOrDefault()</MudAvatar>
+            }
+            else
+            {
+                <MudAvatar Image="https://graph.facebook.com/1234567890/picture?type=normal" Style="height:50px; width:50px;"> </MudAvatar>
+            }*@
+        </div>
+        <div>
+            <MudText Typo="Typo.body1">@Message.FromUserId</MudText>
+            <MudText Typo="Typo.caption" Style="font-size: xx-small!important;">@Message.CreatedDate.ToString("G", CultureInfo.CurrentCulture)</MudText>
+            <MudText Typo="Typo.body2" Style=" padding: 15px;border-radius: 5px;margin-top:5px">@Message.AudioUrl</MudText>
+        </div>
+    }
+    else
+    {
+
+        <div>
+            @*<MudText Typo="Typo.body1">@_messages[0].FromUserFullName</MudText>*@
+            <MudText Typo="Typo.caption" Style="font-size: xx-small!important;">@Message?.CreatedDate.ToString("G", CultureInfo.CurrentCulture)</MudText>
+            <MudText Typo="Typo.body2" Style=" padding: 15px;border-radius: 5px;margin-top:5px">@Message?.AudioUrl</MudText>
+            <MudTooltip Content="will hidden in 1 hour">
+                <MudIcon Icon="@Icons.Material.Filled.AccessTime" Color="Color.Primary" Class="mr-2" />
+            </MudTooltip>
+
+        </div>
+
+    }
+
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+
+    }
+
+}

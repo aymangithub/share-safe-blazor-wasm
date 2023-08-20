@@ -9,26 +9,13 @@
 
 
     <div>
-        @* <MudText Typo="Typo.body1">@_messages[0].FromUserFullName</MudText>*@
         <MudText Typo="Typo.caption" Style="font-size: xx-small!important;">@Message?.CreatedDate.ToString("G", CultureInfo.CurrentCulture)</MudText>
 
 
-        @*  <MudCard>
-        <MudImage Src="Screenshot 2023-07-13 013040.png" />
-        <MudText Typo="Typo.body1" Class="mt-0 ml-2">
-        32423434.pdf
-
-        <MudIconButton Icon="@Icons.Material.Outlined.Edit" Color="Color.Inherit" Class="ml-3" />
-
-        </MudText>
-
-        <MudButton StartIcon="@Icons.Material.Outlined.OpenInBrowser" Typography="Typo.body1" Class="ml-3">Open</MudButton>
-        <MudButton StartIcon="@Icons.Material.Outlined.Download" OnClick="DownloadFile" Typography="Typo.body1" Class="ml-3">Download</MudButton>
-        </MudCard>*@
 
         <MudCard>
             <MudCardContent>
-                <MudImage Src="passport.png" />
+                <MudImage Style="max-width:300px" Src="@Message.ImageUrl" />
                 <MudText Typo="Typo.body1" Class="mt-0 ml-2">
                     passport image
                     <MudIconButton Icon="@Icons.Material.Outlined.Edit" Color="Color.Inherit" Class="ml-1" />

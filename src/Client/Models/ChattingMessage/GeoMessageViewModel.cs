@@ -9,6 +9,6 @@ using System.Threading.Tasks;
 namespace AdminDashboard.Wasm.Models.ChattingMessage;
 public class GeoMessageViewModel : BasicMessageViewModel
 {
-
+    public double Latitude { get; set; }
+    public double Longitude { get; set; }
 }
-

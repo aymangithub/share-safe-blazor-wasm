@@ -1,0 +1,129 @@
+﻿@using System.Linq
+@inject IJSRuntime JsRuntime
+
+<div class="verification-code">
+
+    @for (int i = 0; i < CodeLength; i++)
+    {
+        int localI = i;
+        <input class="verification-code__input"
+               id="verification-code__input_@(i)"
+               type="text"
+               inputmode="numeric"
+               pattern="[0-9]*"
+               maxlength="1"
+               disabled="@IsDisabled"
+        @oninput="(e) => HandleInput(localI, e.Value.ToString())"
+        @onkeyup="(e) => HandleKeyUp(localI, e)"
+               autofocus="@(i == 0 ? "autofocus" : "autofocus")" />
+
+
+    }
+    @*<span class="verification-code__message" style="color: @MessageColor;">@Message</span>*@
+</div>
+
+@code {
+    [Parameter]
+    public bool IsDisabled { get; set; }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            if (CodeLength > 0)
+                await JsRuntime.InvokeVoidAsync("focusOnElement", "verification-code__input_0");
+        }
+    }
+    private async Task FocusOnElement(string elementId)
+    {
+        await JsRuntime.InvokeVoidAsync("focusOnElement", elementId);
+    }
+    private async void HandleKeyUp(int index, KeyboardEventArgs e)
+    {
+        if (e.Key == "Backspace")
+        {
+            // Handle backspace keypress...
+            if (index > 0 && string.IsNullOrWhiteSpace(UserCode[index]))
+            {
+                await JsRuntime.InvokeVoidAsync("MoveCursorToPreviousField", index);
+            }
+        }
+        else
+        {
+            // Handle other keypress...
+            if (UserCode[index] != null && UserCode[index].Length == 1)
+            {
+                await JsRuntime.InvokeVoidAsync("MoveCursorToNextField", index, CodeLength);
+            }
+        }
+    }
+
+
+
+    [Parameter]
+    public string CorrectCode { get; set; }
+    [Parameter]
+    public EventCallback OnCorrectCode { get; set; }
+    [Parameter]
+    public EventCallback OnWrongCode { get; set; }
+
+    private string MessageColor { get; set; } = "black";
+    private string Message { get; set; } = "";
+    private string[] UserCode { get; set; }
+    private int CodeLength => CorrectCode.Length;
+    private async void MoveCursorToNextField(int index)
+    {
+        if (index != CodeLength - 1)
+        {
+            //JsRuntime.InvokeAsync("focus", document.getElementById("verification-code__input_" + (index + 1)));
+            await JsRuntime.InvokeVoidAsync("MoveCursorToNextField", index, CodeLength);
+
+        }
+    }
+    protected override void OnInitialized()
+    {
+        UserCode = new string[CodeLength];
+        base.OnInitialized();
+    }
+
+    private void HandleInput(int index, string input)
+    {
+        UserCode[index] = input;
+
+        if (!UserCode.Contains(null) && !UserCode.Contains(string.Empty))
+        {
+            if (string.Join("", UserCode) == CorrectCode)
+            {
+                Message = "Correct Code!";
+                MessageColor = "green";
+                OnCorrectCode.InvokeAsync();
+            }
+            else
+            {
+                Message = "Wrong Code!";
+                MessageColor = "red";
+                OnWrongCode.InvokeAsync();
+            }
+        }
+    }
+}
+<style>
+
+    .verification-code {
+        display: flex;
+        gap: 10px; /* Adjust this value as needed */
+        align-items: center;
+    }
+
+    .verification-code__input {
+        width: 30px; /* Adjust this value as needed */
+        height: 30px; /* Adjust this value as needed */
+        text-align: center;
+        border: 2px solid #ddd;
+        border-radius: 4px;
+    }
+
+    .verification-code__message {
+        margin-left: 10px; /* Adjust this value as needed */
+    }
+
+</style>

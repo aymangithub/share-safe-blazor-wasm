@@ -1,14 +1,20 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
+using System.Reflection;
 using FSH.BlazorWebAssembly.Client.Infrastructure.ApiClient;
 using FSH.BlazorWebAssembly.Client.Infrastructure.Auth;
+using FSH.BlazorWebAssembly.Client.Infrastructure.AutoMapper;
+using FSH.BlazorWebAssembly.Client.Infrastructure.Dto;
 using FSH.BlazorWebAssembly.Client.Infrastructure.Dto.ChattingMessage;
 using FSH.BlazorWebAssembly.Client.Infrastructure.Dto.Vault;
 using FSH.BlazorWebAssembly.Client.Infrastructure.Notifications;
 using FSH.BlazorWebAssembly.Client.Infrastructure.Preferences;
+using FSH.BlazorWebAssembly.Client.Infrastructure.Repositories;
 using FSH.BlazorWebAssembly.Client.Infrastructure.Services;
 using FSH.WebApi.Shared.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.JSInterop;
 using MudBlazor;
 using MudBlazor.Services;
 
@@ -47,9 +53,21 @@ public static class Startup
                 .AddAuthenticationHandler(config)
                 .Services
             .AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient(ClientName))
-        .AddScoped<IService<BasicMessageDto>, MessageService>()
-        .AddScoped<IService<VaultDto>, VaultService>()
+       .AddAutoMapper(Assembly.GetExecutingAssembly())
+.AddAutoMapper(typeof(MappingProfile))
 
+
+
+
+
+          .AddScoped<IChatMessageRepository>(serviceProvider =>
+    new ChatRepository(serviceProvider.GetRequiredService<IJSRuntime>(), "chatMessages"))
+
+    //    .AddScoped<IConversationRepository>(serviceProvider =>
+    //new ConversationRepository(serviceProvider.GetRequiredService<IJSRuntime>(), "chatConversations"))
+
+        .AddScoped<IChatService, ChatService>()
+        //.AddScoped<IConversationService, ConversationService>()
         ;
 
     private static void RegisterPermissionClaims(AuthorizationOptions options)

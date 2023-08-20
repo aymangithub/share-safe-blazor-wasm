@@ -23,6 +23,7 @@ public partial class MainLayout
             _rightToLeft = preference.IsRTL;
             _drawerOpen = preference.IsDrawerOpen;
         }
+
     }
 
     private async Task RightToLeftToggle()

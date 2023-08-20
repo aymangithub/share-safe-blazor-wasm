@@ -19,6 +19,7 @@ builder.Services.AddClientServices(builder.Configuration);
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddSingleton<IChatComponentFactory, ChatComponentFactory>();
+builder.Services.AddSingleton<ISoundService, SoundService>();
 
 
 var host = builder.Build();

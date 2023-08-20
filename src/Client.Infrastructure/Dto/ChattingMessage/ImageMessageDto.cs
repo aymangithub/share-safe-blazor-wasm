@@ -7,8 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FSH.BlazorWebAssembly.Client.Infrastructure.Dto.ChattingMessage;
-public class ImageMessageDto : BasicMessageDto
+public class ImageMessageDto : BaseMessageDto
 {
+    public string ImageUrl { get; set; }
+    public string Name { get; set; }
+    public int Width { get; set; }
+    public int Height { get; set; }
+    public int SizeInKB { get; set; }
 
 }
 

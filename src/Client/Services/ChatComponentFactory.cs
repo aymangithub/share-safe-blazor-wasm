@@ -38,6 +38,13 @@ public class ChatComponentFactory : IChatComponentFactory
                     builder.AddAttribute(1, "Message", geoMessageViewModel);
                     builder.CloseComponent();
                 };
+            case AudioMessageViewModel audioMessageViewModel:
+                return builder =>
+                {
+                    builder.OpenComponent(0, typeof(AudioMessage));
+                    builder.AddAttribute(1, "Message", audioMessageViewModel);
+                    builder.CloseComponent();
+                };
 
             default:
                 throw new ArgumentException($"Unknown ViewModel type: {messageViewModel.GetType()}");

@@ -7,8 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FSH.BlazorWebAssembly.Client.Infrastructure.Dto.ChattingMessage;
-public class TextMessageDto : BasicMessageDto
+public class TextMessageDto : BaseMessageDto
 {
-
+    public string Message { get; set; }
+    public bool IsCopyable { get; set; }
 }
 

@@ -47,6 +47,45 @@ public class JwtAuthenticationService : AuthenticationStateProvider, IAuthentica
     public void NavigateToExternalLogin(string returnUrl) =>
         throw new NotImplementedException();
 
+    public async Task<bool> LoginFakeAsync(string tenantId, TokenRequest request)
+    {
+
+
+
+            string json = @"{
+      ""Token"": ""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjMwMTA2YzJhLWFjYjMtNGI3NS04NTUwLThmNjI3OWFmOTU2NyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6ImF5bWFuLnNoYXJrYXd5NjA5QGdtYWlsLmNvbSIsImZ1bGxOYW1lIjoiYXltYW4gdGVzIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImF5bWFuIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvc3VybmFtZSI6InRlcyIsImlwQWRkcmVzcyI6IjAuMC4wLjEiLCJ0ZW5hbnQiOiJyb290IiwiaW1hZ2VfdXJsIjoiIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbW9iaWxlcGhvbmUiOiIwMTAwMzU1NTQ1NTUiLCJleHAiOjE2OTE4MjYxMTF9.nJWzBXlUyCX1RYfNo6t8XEvZtX59ye4oNLTdF822Xpg"",
+      ""RefreshToken"": ""xpb9am2mIdmyt05V/1A1S9/Wi9NZlAbx26TSvLMbLXE="",
+      ""RefreshTokenExpiryTime"": ""2027-08-19T06:41:51.1303833Z""
+    }";
+
+        TokenResponse tokenResponse2 = JsonSerializer.Deserialize<TokenResponse>(json);
+
+        string? token = tokenResponse2.Token;
+        string? refreshToken = tokenResponse2.RefreshToken;
+
+        if (string.IsNullOrWhiteSpace(token) || string.IsNullOrWhiteSpace(refreshToken))
+        {
+            return false;
+        }
+
+        await CacheAuthTokens(token, refreshToken);
+
+        // Get permissions for the current user and add them to the cache
+
+        string permissionsJson = @"[
+  ""Permissions.Products.View"",
+  ""Permissions.Products.Search"",
+  ""Permissions.Brands.View"",
+  ""Permissions.Brands.Search""
+]";
+
+        var permission2 = JsonSerializer.Deserialize<ICollection<string>>(permissionsJson);
+        await CachePermissions(permission2);
+
+        NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
+
+        return true;
+    }
     public async Task<bool> LoginAsync(string tenantId, TokenRequest request)
     {
         var tokenResponse = await _tokensClient.GetTokenAsync(tenantId, request);

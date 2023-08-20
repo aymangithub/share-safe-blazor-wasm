@@ -9,6 +9,6 @@ using System.Threading.Tasks;
 namespace AdminDashboard.Wasm.Models.ChattingMessage;
 public class TextMessageViewModel : BasicMessageViewModel
 {
-
+    public string Message { get; set; }
+    public bool IsCopyable { get; set; }
 }
-

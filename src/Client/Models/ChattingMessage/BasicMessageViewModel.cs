@@ -11,18 +11,15 @@ namespace AdminDashboard.Wasm.Models.ChattingMessage;
 public class BasicMessageViewModel : IMessageViewModel
 {
 
-    public MessageType MessageType { get; set; }
-    public VaultDto Vault { get; set; }
     public long Id { get; set; }
-    public string FromUserId { get; set; }
-    public string FromUserImageURL { get; set; }
-    public string FromUserFullName { get; set; }
-    public string ToUserId { get; set; }
-    public string ToUserImageURL { get; set; }
-    public string ToUserFullName { get; set; }
-    public string Message { get; set; }
+    public int ConversationId { get; set; }
+    public string MessageType { get; set; }
+    public long Timestamp { get; set; }
     public DateTime CreatedDate { get; set; }
-    
+    public string FromUserId { get; set; }
+    public int ExpiryMinutes { get; set; }
+    public int AllowedViewCount { get; set; }
+
 
 
 }

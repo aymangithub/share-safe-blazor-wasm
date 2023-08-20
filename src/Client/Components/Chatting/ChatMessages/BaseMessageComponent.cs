@@ -29,6 +29,7 @@ public class BaseMessageComponent<TMessage> : ComponentBase
 
         if (user.Identity?.IsAuthenticated == true)
         {
+            var ss = user.GetUserId();
             IsUserMessage = user.GetUserId() == Message.FromUserId;
         }
     }

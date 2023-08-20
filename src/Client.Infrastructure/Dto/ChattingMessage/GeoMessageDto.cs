@@ -7,8 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FSH.BlazorWebAssembly.Client.Infrastructure.Dto.ChattingMessage;
-public class GeoMessageDto : BasicMessageDto
+public class GeoMessageDto : BaseMessageDto
 {
-
+    public double Latitude { get; set; }
+    public double Longitude { get; set; }
 }
 

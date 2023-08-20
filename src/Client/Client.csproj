@@ -37,7 +37,7 @@
 
     <ItemGroup>
       <Folder Include="Components\Dialogs\Common\" />
-      <Folder Include="Components\Dialogs\Custom\" />
       <Folder Include="Components\Settings\" />
+      <Folder Include="wwwroot\sounds\demo\" />
     </ItemGroup>
 </Project>

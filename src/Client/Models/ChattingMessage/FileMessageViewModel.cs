@@ -9,6 +9,12 @@ using System.Threading.Tasks;
 namespace AdminDashboard.Wasm.Models.ChattingMessage;
 public class FileMessageViewModel : BasicMessageViewModel
 {
-
+    public string FilePath { get; set; }
+    public bool CanBeDownloaded { get; set; }
+    public string Name { get; set; }
+    public int Width { get; set; }
+    public int Height { get; set; }
+    public int SizeInKB { get; set; }
+    public string Extension { get; set; }
 }
 

@@ -8,10 +8,12 @@ using AdminDashboard.Wasm.Models.Vault;
 using AdminDashboard.Wasm.ModelsAdminDashboard.Wasm.Models;
 using AutoMapper;
 using FSH.BlazorWebAssembly.Client.Components.Dialogs;
+using FSH.BlazorWebAssembly.Client.Components.Dialogs.Custom;
 using FSH.BlazorWebAssembly.Client.Infrastructure.ApiClient;
 using FSH.BlazorWebAssembly.Client.Infrastructure.Dto.ChattingMessage;
 using FSH.BlazorWebAssembly.Client.Infrastructure.Dto.Vault;
 using FSH.BlazorWebAssembly.Client.Infrastructure.Services;
+using FSH.BlazorWebAssembly.Client.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -31,12 +33,18 @@ namespace FSH.BlazorWebAssembly.Client.Pages.Communication;
 
 public partial class Chat
 {
+    //[Inject]
+    //private IServiceT<VaultDto> VaultService { get; set; }
+    //[Inject]
+    //private IServiceT<BaseMessageDto> MessageService { get; set; }
     [Inject]
-    private IService<VaultDto> VaultService { get; set; }
-    [Inject]
-    private IService<BasicMessageDto> MessageService { get; set; }
-    [Inject]
+
+
     public IMapper Mapper { get; set; }
+    [Inject]
+    private IChatService ChatService { get; set; }
+    //[Inject]
+    //private IConversationService ConversationService { get; set; }
 
     private Timer _timer;
 
@@ -55,7 +63,9 @@ public partial class Chat
         dotNetReference?.Dispose();
     }
 
-    private List<BasicMessageViewModel> _messages = new List<BasicMessageViewModel>();
+    private List<BasicMessageViewModel> _messagesViewModels = new List<BasicMessageViewModel>();
+    private List<BaseConversationViewModel> baseConversationViewModels = new List<BaseConversationViewModel>();
+
 
     public List<VaultViewModel> _vaultList = new List<VaultViewModel>();
 
@@ -203,7 +213,7 @@ public partial class Chat
         {
             var dotNetReference = DotNetObjectReference.Create(this);
             await JSRuntime.InvokeVoidAsync("initializeScrollCheck", dotNetReference);
-            await JSRuntime.InvokeVoidAsync("initializeMap", "map", 37.7749, -122.4194, 10);
+            //await JSRuntime.InvokeVoidAsync("initializeMap", "map", 37.7749, -122.4194, 10);
         }
         await base.OnAfterRenderAsync(firstRender);
     }
@@ -223,8 +233,21 @@ public partial class Chat
     public async Task SendTxtMessageAsync()
     {
         await JSRuntime.InvokeVoidAsync("scrollToBottom");
-        await JSRuntime.InvokeVoidAsync("playSound", "sounds/message-sent.mp3");
+        await SoundService.PlaySoundAsync(SoundEventTypes.MessageSent);
 
+        await ChatService.AddAsync(new TextMessageDto
+        {
+            Id = 1,
+            ConversationId = 1, // Assuming 'id' is defined elsewhere in your code
+            Message = "Hello, this is your bank. How may I assist you today?",
+            Timestamp = DateTimeOffset.Now.ToUnixTimeMilliseconds(), // Assuming you're using a compatible date type
+            IsCopyable = true,
+            MessageType = "text",
+            FromUserId = "30106c2a-acb3-4b75-8550-8f6279af9567",
+            ExpiryMinutes = 30,
+            AllowedViewCount = 5
+        }
+);
 
     }
     public async Task ScrollBottom()
@@ -233,27 +256,24 @@ public partial class Chat
     }
     protected override async Task OnInitializedAsync()
     {
-        var vaultDtoList = await VaultService.GetAllAsync();
-        var messagesDtoList = await MessageService.GetAllAsync();
-        MapData(vaultDtoList, messagesDtoList);
+        //var vaultDtoList = await VaultService.GetAllAsync();
+        //var messagesDtoList = await MessageService.GetAllAsync();
+        var messagesDtoList = await ChatService.GetConversationMessages(1);
+       // MapData(vaultDtoList);
+
+        _messagesViewModels = messagesDtoList.Select(messageDto => Mapper.Map<BasicMessageViewModel>(messageDto)).ToList();
+
+        //var list = await ConversationService.GetAllAsync();
+
     }
 
-    private void MapData(IEnumerable<VaultDto> vaultDtos, IEnumerable<BasicMessageDto> messageDtos)
+    private void MapData(IEnumerable<VaultDto> vaultDtos)
     {
         _vaultList = Mapper.Map<List<VaultViewModel>>(vaultDtos);
 
-        //_messages = messageDtos.Select<BasicMessageDto, BasicMessageViewModel>(messageDto => messageDto switch
-        //{
-        //    TextMessageDto textMessageDto => Mapper.Map<TextMessageViewModel>(textMessageDto),
-        //    FileMessageDto fileMessageDto => Mapper.Map<FileMessageViewModel>(fileMessageDto),
-        //    // add other cases for ImageMessageDto, GeoMessageDto, etc.
-        //    _ => null
-        //}).ToList();
-
-        _messages = messageDtos.Select(messageDto => Mapper.Map<BasicMessageViewModel>(messageDto)).ToList();
+        //_messagesViewModels = messageDtos.Select(messageDto => Mapper.Map<BasicMessageViewModel>(messageDto)).ToList();
 
 
-        //_messages = Mapper.Map<List<BasicMessageViewModel>>(messageDtos);
     }
     //protected override async Task OnInitializedAsync()
     //{
@@ -386,54 +406,20 @@ public partial class Chat
         _open = true;
     }
 
-    private void SomeOneJoined(object state)
+    private async void SomeOneJoined(object state)
     {
+        string textContent = L["Please enter the partnet join code."];
+        var parameters = new DialogParameters();
 
-        var parameters = new DialogParameters
-        {
-            { nameof(InputDialog.ContentText), "Please enter the partner." },
-            { nameof(InputDialog.Title), "Accept new join." },
-            { nameof(InputDialog.InputFieldName), "join code" },
-            { nameof(InputDialog.OKButtonText), "Admit" }
+        parameters.Add(nameof(AdmitJoinRequest.ContentText), textContent);
 
 
-
-        };
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
-        var dialog = DialogService.Show<InputDialog>(L["Closing Value"], parameters, options);
+
+        var dialog = DialogService.Show<AdmitJoinRequest>(L["AdmitJoinRequest"], parameters, options);
+        var result = await dialog.Result;
 
 
-
-
-
-        //var parameters = new DialogParameters();
-
-        //parameters.Add(nameof(InputDialog.Title), L["Accept new join."]);
-        //parameters.Add(nameof(InputDialog.ContentText), L["Please enter the partner."]);
-        //parameters.Add(nameof(InputDialog.InputFieldName), L["Partner code"]);
-
-
-        //var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
-
-        //var dialog = DialogService.Show<InputDialog>(L["InputDialog"], parameters, options);
-        //var result = await dialog.Result;
-        //if (!result.Cancelled)
-        //{
-        //    Joining = true;
-        //    await Task.Delay(2000);
-        //    Joining = false;
-
-        //    var endCoderesult = await DialogService.ShowMessageBox("End Joining Code", "(859) This share the code with the vault owner.", yesText: "Done", cancelText: "Cancel");
-        //    if (endCoderesult == true)
-        //    {
-        //        await LoginAsync();
-        //        Navigation.NavigateTo("/chat");
-        //        await JSRuntime.InvokeVoidAsync("playSound", "sounds/user-joined-successfully.mp3");
-        //    }
-
-
-
-        //}
     }
 
 

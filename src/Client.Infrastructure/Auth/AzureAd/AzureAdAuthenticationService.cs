@@ -31,4 +31,9 @@ internal class AzureAdAuthenticationService : IAuthenticationService
         NavigateToExternalLogin(returnUrl);
         return Task.CompletedTask;
     }
+
+    public Task<bool> LoginFakeAsync(string tenantId, TokenRequest request)
+    {
+        throw new NotImplementedException();
+    }
 }
